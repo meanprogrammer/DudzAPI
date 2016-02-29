@@ -19,7 +19,7 @@ namespace DudzAPI.Controllers
         // GET api/values/5
         public string Get(int id)
         {
-            return "value";
+            return Guid.NewGuid().ToString();
         }
 
         // POST api/values
