@@ -74,6 +74,12 @@ namespace DudzAPI.Controllers
             return Ok();
         }
 
+        [Route("test")]
+        public string TestPost()
+        {
+            return "Hello World!";
+        }
+
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
