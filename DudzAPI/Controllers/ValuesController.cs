@@ -28,9 +28,12 @@ namespace DudzAPI.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public HttpResponseMessage Post([FromBody]string value)
         {
-            traceSource.TraceEvent(TraceEventType.Information, 0, value);
+            HttpResponseMessage resp = Request.CreateResponse();
+            resp.ReasonPhrase = value;
+            return resp;
         }
 
         // PUT api/values/5
