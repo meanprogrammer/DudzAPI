@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -30,7 +31,8 @@ namespace DudzAPI.Controllers
         public void Post([FromBody]string value)
         {
             postedValue = value;
-            HttpContext.Current.Session.Add("vvv", value);
+            var traceSource = new TraceSource("AppHarborTraceSource", defaultLevel: SourceLevels.All);
+            traceSource.TraceEvent(TraceEventType.Critical, 0, "Foo");
         }
 
         // PUT api/values/5
