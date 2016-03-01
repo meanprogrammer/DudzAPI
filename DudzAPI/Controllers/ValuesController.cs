@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace DudzAPI.Controllers
@@ -12,6 +13,7 @@ namespace DudzAPI.Controllers
     public class ValuesController : ApiController
     {
         static string postedValue;
+        
         // GET api/values
         public IEnumerable<string> Get()
         {
@@ -21,13 +23,14 @@ namespace DudzAPI.Controllers
         // GET api/values/5
         public string Get(int id)
         {
-            return postedValue;//Guid.NewGuid().ToString();
+            return HttpContext.Current.Session["vvv"].ToString(); //postedValue;//Guid.NewGuid().ToString();
         }
 
         // POST api/values
         public void Post([FromBody]string value)
         {
             postedValue = value;
+            HttpContext.Current.Session.Add("vvv", value);
         }
 
         // PUT api/values/5
