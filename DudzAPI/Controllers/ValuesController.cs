@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,6 +11,7 @@ namespace DudzAPI.Controllers
     //[Authorize]
     public class ValuesController : ApiController
     {
+        static string postedValue;
         // GET api/values
         public IEnumerable<string> Get()
         {
@@ -19,12 +21,13 @@ namespace DudzAPI.Controllers
         // GET api/values/5
         public string Get(int id)
         {
-            return Guid.NewGuid().ToString();
+            return postedValue;//Guid.NewGuid().ToString();
         }
 
         // POST api/values
         public void Post([FromBody]string value)
         {
+            postedValue = value;
         }
 
         // PUT api/values/5
