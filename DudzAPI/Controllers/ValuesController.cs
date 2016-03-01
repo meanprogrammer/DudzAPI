@@ -32,7 +32,7 @@ namespace DudzAPI.Controllers
         {
             postedValue = value;
             var traceSource = new TraceSource("AppHarborTraceSource", defaultLevel: SourceLevels.All);
-            traceSource.TraceEvent(TraceEventType.Critical, 0, value);
+            traceSource.TraceEvent(TraceEventType.Critical, 0, "aaaaa");
         }
 
         // PUT api/values/5
