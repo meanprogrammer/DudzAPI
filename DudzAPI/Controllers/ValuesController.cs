@@ -23,14 +23,14 @@ namespace DudzAPI.Controllers
         // GET api/values/5
         public string Get(int id)
         {
-            traceSource.TraceEvent(TraceEventType.Critical, 0, id.ToString());
+            traceSource.TraceEvent(TraceEventType.Information, 0, id.ToString());
             return Guid.NewGuid().ToString();
         }
 
         // POST api/values
         public void Post([FromBody]string value)
         {
-            traceSource.TraceEvent(TraceEventType.Critical, 0, value);
+            traceSource.TraceEvent(TraceEventType.Information, 0, value);
         }
 
         // PUT api/values/5
