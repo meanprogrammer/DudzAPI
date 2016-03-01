@@ -33,6 +33,7 @@ namespace DudzAPI.Controllers
         {
             HttpResponseMessage resp = Request.CreateResponse();
             resp.ReasonPhrase = value;
+            resp.StatusCode = HttpStatusCode.Forbidden;
             return resp;
         }
 
