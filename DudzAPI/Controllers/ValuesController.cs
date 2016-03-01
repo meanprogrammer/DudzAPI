@@ -13,7 +13,6 @@ namespace DudzAPI.Controllers
     //[Authorize]
     public class ValuesController : ApiController
     {
-        static string postedValue;
         
         // GET api/values
         public IEnumerable<string> Get()
@@ -24,15 +23,16 @@ namespace DudzAPI.Controllers
         // GET api/values/5
         public string Get(int id)
         {
+            var traceSource = new TraceSource("AppHarborTraceSource", defaultLevel: SourceLevels.All);
+            traceSource.TraceEvent(TraceEventType.Critical, 0, id.ToString());
             return Guid.NewGuid().ToString();
         }
 
         // POST api/values
         public void Post([FromBody]string value)
         {
-            postedValue = value;
             var traceSource = new TraceSource("AppHarborTraceSource", defaultLevel: SourceLevels.All);
-            traceSource.TraceEvent(TraceEventType.Critical, 0, "aaaaa");
+            traceSource.TraceEvent(TraceEventType.Critical, 0, value);
         }
 
         // PUT api/values/5
