@@ -24,7 +24,7 @@ namespace DudzAPI.Controllers
         // GET api/values/5
         public string Get(int id)
         {
-            return HttpContext.Current.Session["vvv"].ToString(); //postedValue;//Guid.NewGuid().ToString();
+            return Guid.NewGuid().ToString();
         }
 
         // POST api/values
