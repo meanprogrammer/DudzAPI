@@ -16,12 +16,17 @@ namespace DudzAPI.Controllers
     {
         TraceSource traceSource = new TraceSource("AppHarborTraceSource", defaultLevel: SourceLevels.All);
 
-        // GET api/values/5
         [HttpGet, Route("api/values/get")]
-        public string Get(int id)
+        public IHttpActionResult Get()
         {
-            traceSource.TraceEvent(TraceEventType.Information, 0, id.ToString());
-            return Guid.NewGuid().ToString();
+            return Ok("Get All");
+        }
+
+        // GET api/values/5
+        [HttpGet, Route("api/values/get/{id}")]
+        public IHttpActionResult Get(int id)
+        {
+            return Ok(string.Format("Get id={0}", id));
         }
 
         // POST api/values
@@ -33,14 +38,16 @@ namespace DudzAPI.Controllers
 
         // PUT api/values/5
         [HttpPut, Route("api/values/put")]
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put([FromBody]string value)
         {
+            return Ok(string.Format("value={0}", value));
         }
 
         // DELETE api/values/5
         [HttpDelete, Route("api/values/delete")]
-        public void Delete(int id)
+        public IHttpActionResult Delete([FromBody]int id)
         {
+            return Ok(string.Format("id={0}", id));
         }
     }
 }
