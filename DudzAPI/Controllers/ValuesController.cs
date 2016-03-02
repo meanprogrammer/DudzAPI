@@ -29,12 +29,22 @@ namespace DudzAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public HttpResponseMessage Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]string value)
         {
+            /*
             HttpResponseMessage resp = Request.CreateResponse();
             resp.ReasonPhrase = value;
-            resp.StatusCode = HttpStatusCode.Forbidden;
-            return resp;
+            resp.StatusCode = HttpStatusCode.OK;
+            resp.
+            return resp; */
+            IHttpActionResult response;
+            //we want a 303 with the ability to set location
+            HttpResponseMessage responseMsg = new HttpResponseMessage(HttpStatusCode.RedirectMethod);
+            responseMsg.Headers.Add("value", value);
+            response = ResponseMessage(responseMsg);
+
+            return response;
+             
         }
 
         // PUT api/values/5
