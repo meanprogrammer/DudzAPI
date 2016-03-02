@@ -40,7 +40,7 @@ namespace DudzAPI.Controllers
             IHttpActionResult response;
             //we want a 303 with the ability to set location
             HttpResponseMessage responseMsg = new HttpResponseMessage(HttpStatusCode.OK);
-            responseMsg.Headers.Add("value", value);
+            responseMsg.Headers.Add("value", "test");
             response = ResponseMessage(responseMsg);
 
             return response;
