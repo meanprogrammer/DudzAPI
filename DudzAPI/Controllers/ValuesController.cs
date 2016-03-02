@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using DudzAPI.Helper;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -42,6 +43,8 @@ namespace DudzAPI.Controllers
             HttpResponseMessage responseMsg = new HttpResponseMessage(HttpStatusCode.OK);
             responseMsg.Headers.Add("value", value);
             response = ResponseMessage(responseMsg);
+
+            MailGunHelper.SendMailLog(value);
 
             return response;
              
