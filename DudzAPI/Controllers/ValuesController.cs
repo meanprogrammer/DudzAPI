@@ -29,8 +29,7 @@ namespace DudzAPI.Controllers
         }
 
         // POST api/values
-        [HttpPost]
-        public IHttpActionResult Post(string value)
+        public IHttpActionResult Post([FromBody]string value)
         {
             /*
             HttpResponseMessage resp = Request.CreateResponse();
