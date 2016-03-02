@@ -32,6 +32,7 @@ namespace DudzAPI.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromBody]string value)
         {
+            traceSource.TraceEvent(TraceEventType.Information, 0, value);
             /*
             HttpResponseMessage resp = Request.CreateResponse();
             resp.ReasonPhrase = value;
