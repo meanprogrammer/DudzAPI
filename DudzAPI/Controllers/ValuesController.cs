@@ -44,7 +44,7 @@ namespace DudzAPI.Controllers
             responseMsg.Headers.Add("value", value);
             response = ResponseMessage(responseMsg);
 
-            MailGunHelper.SendMailLog(value);
+            //MailGunHelper.SendMailLog(value);
 
             return response;
              
