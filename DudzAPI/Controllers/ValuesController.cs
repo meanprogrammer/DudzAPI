@@ -29,6 +29,7 @@ namespace DudzAPI.Controllers
         }
 
         // POST api/values
+        [HttpPost]
         public IHttpActionResult Post([FromBody]string value)
         {
             /*
