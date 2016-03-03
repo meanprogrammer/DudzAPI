@@ -14,8 +14,6 @@ namespace DudzAPI.Controllers
     //[Authorize]
     public class ValuesController : ApiController
     {
-        TraceSource traceSource = new TraceSource("AppHarborTraceSource", defaultLevel: SourceLevels.All);
-
         [HttpGet, Route("api/values/get")]
         public IHttpActionResult Get()
         {
