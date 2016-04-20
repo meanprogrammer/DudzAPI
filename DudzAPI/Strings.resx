@@ -117,6 +117,36 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="INSERT_COUNTERPARTIES_SQL" xml:space="preserve">
+    <value>INSERT INTO [dbo].[TransactionCounterparties]
+           ([TransactionId]
+           ,[IssuingBankId]
+           ,[IssuingBankBranch]
+           ,[SublimitId]
+           ,[OtherIssuingBankId]
+           ,[ConfirmingBankId]
+           ,[ConfirmingBankBranchId]
+           ,[OtherConfirmingBankId]
+           ,[OriginatingBankId]
+           ,[IBSWIFTName]
+           ,[CBSWIFTName]
+           ,[CBBranchSWIFTName]
+           ,[LastUpdatedOn])
+     VALUES
+           ({0}--transactionId
+           ,{1} --Issuing Bank ID
+           ,NULL
+           ,26
+           ,NULL
+           ,1807
+           ,NULL
+           ,NULL
+           ,1807
+           ,NULL
+           ,NULL
+           ,NULL
+           ,'2016-04-20 22:56:55.737')</value>
+  </data>
   <data name="INSERT_TRANSACTION_SQL" xml:space="preserve">
     <value>INSERT INTO [dbo].[Transaction]
            ([ProductTypeId]

@@ -61,6 +61,31 @@ namespace DudzAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO [dbo].[TransactionCounterparties]
+        ///           ([TransactionId]
+        ///           ,[IssuingBankId]
+        ///           ,[IssuingBankBranch]
+        ///           ,[SublimitId]
+        ///           ,[OtherIssuingBankId]
+        ///           ,[ConfirmingBankId]
+        ///           ,[ConfirmingBankBranchId]
+        ///           ,[OtherConfirmingBankId]
+        ///           ,[OriginatingBankId]
+        ///           ,[IBSWIFTName]
+        ///           ,[CBSWIFTName]
+        ///           ,[CBBranchSWIFTName]
+        ///           ,[LastUpdatedOn])
+        ///     VALUES
+        ///           ({0}--transactionId
+        ///           , [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string INSERT_COUNTERPARTIES_SQL {
+            get {
+                return ResourceManager.GetString("INSERT_COUNTERPARTIES_SQL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to INSERT INTO [dbo].[TransactionADBExposure]
         ///           ([TransactionId]
         ///           ,[UEIId]

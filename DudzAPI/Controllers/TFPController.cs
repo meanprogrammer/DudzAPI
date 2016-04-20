@@ -102,6 +102,13 @@ namespace DudzAPI.Controllers
                             using (DbCommand adbExpCmd = db.GetSqlStringCommand(string.Format(Strings.INSERT_TRANS_ADB_EXPOSURE, transactionId, ueiId)))
                             {
                                 db.ExecuteNonQuery(adbExpCmd);
+
+                                using (DbCommand tranC = db.GetSqlStringCommand(string.Format(Strings.INSERT_COUNTERPARTIES_SQL, transactionId, tfp.IssuingBankName)))
+                                {
+                                    db.ExecuteNonQuery(tranC);
+                                }
+
+
                                 b.AppendFormat("{0},{1}{2}",transactionId, ueiId, Environment.NewLine);
 
 
@@ -141,11 +148,12 @@ namespace DudzAPI.Controllers
             {
                 var separatedIds = id.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
                 var sqlCmd = string.Format(
-                    "delete from [Transaction] where id = {0};delete from [TransactionUEI] where id = {1};delete from [TransactionADBExposure] where [TransactionId] = {2} and [UEIId] = {3};",
+                    "delete from [Transaction] where id = {0};delete from [TransactionUEI] where id = {1};delete from [TransactionADBExposure] where [TransactionId] = {2} and [UEIId] = {3};delete from [TransactionCounterparties] where [TransactionId] = {4};",
                             separatedIds.FirstOrDefault(),
                             separatedIds.Last(),
                             separatedIds.FirstOrDefault(),
-                            separatedIds.Last()
+                            separatedIds.Last(),
+                            separatedIds.FirstOrDefault()
                     );
                 using (DbCommand deleteCommand = db.GetSqlStringCommand(sqlCmd))
                 {
@@ -157,6 +165,7 @@ namespace DudzAPI.Controllers
             //delete from [Transaction] where id = 22319;
             //delete from [TransactionUEI] where id = 22465;
             //delete from [TransactionADBExposure] where [TransactionId] = 22319 and [UEIId] = 22465;
+            //delete from [TransactionCounterparties] where [TransactionId] = 22319 and [IssuingBankId] = 22465;
         }
     }
 }
