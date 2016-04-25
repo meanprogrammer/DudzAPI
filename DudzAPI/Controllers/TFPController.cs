@@ -99,7 +99,7 @@ namespace DudzAPI.Controllers
                         var ueiId = db.ExecuteScalar(ueiCmd);
                         if (ueiId != null)
                         {
-                            using (DbCommand adbExpCmd = db.GetSqlStringCommand(string.Format(Strings.INSERT_TRANS_ADB_EXPOSURE, transactionId, ueiId)))
+                            using (DbCommand adbExpCmd = db.GetSqlStringCommand(string.Format(Strings.INSERT_TRANS_ADB_EXPOSURE, transactionId, ueiId, tfp.AmountADBCovered)))
                             {
                                 db.ExecuteNonQuery(adbExpCmd);
 
