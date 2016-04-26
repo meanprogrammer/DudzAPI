@@ -61,6 +61,33 @@ namespace DudzAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to with RESULT0
+        ///as
+        ///(
+        ///	select  
+        ///	[CounterParty].Id as CouterPartyIdTo,
+        ///	[CounterParty].Shortname as ShortnameTo,
+        ///	[Country].Country as CountryTo,
+        ///	sum(isnull([Allocation].SublimitAmountInUSD2,0)) as SublimitAmountInUSDTo,
+        ///	isnull(SubLimitTypeTo.Mnemonic,&apos;&apos;) as SubLimitTypeTo
+        ///	from [Allocation]
+        ///
+        ///	left join [SystemStatus]
+        ///	on [SystemStatus].Id = [Allocation].AllocationSystemStatusId
+        ///
+        ///	left join [Status]
+        ///	on [Status].Id = [Allocation].StatusCodeId
+        ///
+        ///	left join [StatusCodes]
+        ///	on [StatusCodes].Id =  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string GETALL_LIMIT_SQL {
+            get {
+                return ResourceManager.GetString("GETALL_LIMIT_SQL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to INSERT INTO [dbo].[TransactionCounterparties]
         ///           ([TransactionId]
         ///           ,[IssuingBankId]
