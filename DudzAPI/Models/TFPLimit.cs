@@ -15,6 +15,8 @@ namespace DudzAPI.Models
         public string CountryFrom { get; set; }
         public decimal SublimitAmountInUSDTo { get; set; }
         public decimal SublimitAmountInUSDFrom { get; set; }
+        public Int64 SublimitTypeIdTo { get; set; }
+        public Int64 SublimitTypeIdFrom { get; set; }
         public string SublimitTypeTo { get; set; }
         public string SublimitTypeFrom { get; set; }
         public decimal FinalLimit { get; set; }

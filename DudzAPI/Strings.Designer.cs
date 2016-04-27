@@ -65,10 +65,11 @@ namespace DudzAPI {
         ///as
         ///(
         ///	select  
-        ///	[CounterParty].Id as CouterPartyIdTo,
+        ///	[CounterParty].Id as CounterPartyIdTo,
         ///	[CounterParty].Shortname as ShortnameTo,
         ///	[Country].Country as CountryTo,
         ///	sum(isnull([Allocation].SublimitAmountInUSD2,0)) as SublimitAmountInUSDTo,
+        ///	SubLimitTypeTo.Id as SubLimitTypeIdTo,
         ///	isnull(SubLimitTypeTo.Mnemonic,&apos;&apos;) as SubLimitTypeTo
         ///	from [Allocation]
         ///
@@ -78,8 +79,7 @@ namespace DudzAPI {
         ///	left join [Status]
         ///	on [Status].Id = [Allocation].StatusCodeId
         ///
-        ///	left join [StatusCodes]
-        ///	on [StatusCodes].Id =  [rest of string was truncated]&quot;;.
+        ///	left j [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GETALL_LIMIT_SQL {
             get {

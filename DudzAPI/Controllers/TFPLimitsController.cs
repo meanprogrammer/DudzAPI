@@ -32,17 +32,19 @@ namespace DudzAPI.Controllers
                     while (reader.Read())
                     {
                         TFPLimit limit = new TFPLimit();
-                        limit.CounterPartyIDTo = reader.IsDBNull(0) ? 0 : reader.GetInt64(0);
-                        limit.ShortnameTo = reader.IsDBNull(1) ? string.Empty : reader.GetString(1);
-                        limit.CountryTo = reader.IsDBNull(2) ? string.Empty : reader.GetString(2);
-                        limit.SublimitAmountInUSDTo = reader.IsDBNull(3) ? 0 : reader.GetDecimal(3);
-                        limit.SublimitTypeTo = reader.IsDBNull(4) ? string.Empty : reader.GetString(4);
-                        limit.CounterPartyIDFrom = reader.IsDBNull(5) ? 0 : reader.GetInt64(5);
-                        limit.ShortnameFrom = reader.IsDBNull(6) ? string.Empty : reader.GetString(6);
-                        limit.CountryFrom = reader.IsDBNull(7) ? string.Empty : reader.GetString(7);
-                        limit.SublimitAmountInUSDFrom = reader.IsDBNull(8) ? 0 : reader.GetDecimal(8);
-                        limit.SublimitTypeFrom = reader.IsDBNull(9) ? string.Empty : reader.GetString(9);
-                        limit.FinalLimit = reader.IsDBNull(10) ? 0 : reader.GetDecimal(10);
+                        limit.CounterPartyIDTo = reader.IsDBNull(reader.GetOrdinal("CounterPartyIdTo")) ? 0 : reader.GetInt64(reader.GetOrdinal("CounterPartyIdTo"));
+                        limit.ShortnameTo = reader.IsDBNull(reader.GetOrdinal("ShortnameTo")) ? string.Empty : reader.GetString(reader.GetOrdinal("ShortnameTo"));
+                        limit.CountryTo = reader.IsDBNull(reader.GetOrdinal("CountryTo")) ? string.Empty : reader.GetString(reader.GetOrdinal("CountryTo"));
+                        limit.SublimitAmountInUSDTo = reader.IsDBNull(reader.GetOrdinal("SublimitAmountInUSDTo")) ? 0 : reader.GetDecimal(reader.GetOrdinal("SublimitAmountInUSDTo"));
+                        limit.SublimitTypeTo = reader.IsDBNull(reader.GetOrdinal("SublimitTypeTo")) ? string.Empty : reader.GetString(reader.GetOrdinal("SublimitTypeTo"));
+                        limit.SublimitTypeIdTo = reader.IsDBNull(reader.GetOrdinal("SublimitTypeIdTo")) ? 0 : reader.GetInt64(reader.GetOrdinal("SublimitTypeIdTo"));
+                        limit.CounterPartyIDFrom = reader.IsDBNull(reader.GetOrdinal("CounterPartyIDFrom")) ? 0 : reader.GetInt64(reader.GetOrdinal("CounterPartyIDFrom"));
+                        limit.ShortnameFrom = reader.IsDBNull(reader.GetOrdinal("ShortnameFrom")) ? string.Empty : reader.GetString(reader.GetOrdinal("ShortnameFrom"));
+                        limit.CountryFrom = reader.IsDBNull(reader.GetOrdinal("CountryFrom")) ? string.Empty : reader.GetString(reader.GetOrdinal("CountryFrom"));
+                        limit.SublimitAmountInUSDFrom = reader.IsDBNull(reader.GetOrdinal("SublimitAmountInUSDFrom")) ? 0 : reader.GetDecimal(reader.GetOrdinal("SublimitAmountInUSDFrom"));
+                        limit.SublimitTypeFrom = reader.IsDBNull(reader.GetOrdinal("SublimitTypeFrom")) ? string.Empty : reader.GetString(reader.GetOrdinal("SublimitTypeFrom"));
+                        limit.SublimitTypeIdFrom = reader.IsDBNull(reader.GetOrdinal("SublimitTypeIdFrom")) ? 0 : reader.GetInt64(reader.GetOrdinal("SublimitTypeIdFrom"));
+                        limit.FinalLimit = reader.IsDBNull(reader.GetOrdinal("FinalLimit")) ? 0 : reader.GetDecimal(reader.GetOrdinal("FinalLimit"));
 
                         limits.Add(limit);
                     }
@@ -50,6 +52,7 @@ namespace DudzAPI.Controllers
             }
             return Ok(limits);
         }
+
 
         // GET: api/TFPLimits/5
 
