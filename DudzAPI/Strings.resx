@@ -213,6 +213,199 @@ as
 	--,RESULT0.SubLimitTypeTo
 	--,RESULT1.SubLimitTypeFrom</value>
   </data>
+  <data name="GET_LIMIT_BY_COUNTERPARTYID" xml:space="preserve">
+    <value>with RESULT0
+as
+(
+	select  
+	[CounterParty].Id as CounterPartyIdTo,
+	[CounterParty].Shortname as ShortnameTo,
+	[Country].Country as CountryTo,
+	sum(isnull([Allocation].SublimitAmountInUSD2,0)) as SublimitAmountInUSDTo,
+	SubLimitTypeTo.Id as SubLimitTypeIdTo,
+	isnull(SubLimitTypeTo.Mnemonic,'') as SubLimitTypeTo
+	from [Allocation]
+
+	left join [SystemStatus]
+	on [SystemStatus].Id = [Allocation].AllocationSystemStatusId
+
+	left join [Status]
+	on [Status].Id = [Allocation].StatusCodeId
+
+	left join [StatusCodes]
+	on [StatusCodes].Id = [Status].StatusCodeId
+
+	left join [CounterParty]
+	on [CounterParty].Id = [Allocation].CounterpartyId
+
+	left join [Country]
+	on [Country].Id = [CounterParty].CountryId1
+
+
+	left join [SubLimitType] as SubLimitTypeTo
+	on SubLimitTypeTo.Id = Allocation.SublimitTypeId2
+
+	where [StatusCodes].Id = 107 --Active
+	and [SystemStatus].Id in (31,38)
+	and [CounterParty].Id = {0}
+
+	group by
+	[CounterParty].Id,
+	[CounterParty].Shortname,
+	[Country].Country,
+	SubLimitTypeTo.Id,
+	SubLimitTypeTo.Mnemonic
+	
+
+),RESULT1 as
+(
+	select 
+	[CounterParty].Id as CounterPartyIdFrom,
+	[CounterParty].Shortname as ShortnameFrom,
+	[Country].Country as CountryFrom,
+	sum(isnull([Allocation].SublimitAmountInUSD,0)) as SublimitAmountInUSDFrom,
+	SubLimitTypeFrom.Id as SubLimitTypeIdFrom,
+	isnull(SubLimitTypeFrom.Mnemonic,'') as SubLimitTypeFrom
+	from [Allocation]
+
+	left join [SystemStatus]
+	on [SystemStatus].Id = [Allocation].AllocationSystemStatusId
+
+	left join [Status]
+	on [Status].Id = [Allocation].StatusCodeId
+
+	left join [StatusCodes]
+	on [StatusCodes].Id = [Status].StatusCodeId
+
+	left join [CounterParty]
+	on [CounterParty].Id = [Allocation].CounterpartyId
+
+	left join [Country]
+	on [Country].Id = [CounterParty].CountryId1
+
+	left join [SubLimitType] as SubLimitTypeFrom
+	on SubLimitTypeFrom.Id = Allocation.SublimitTypeId1
+
+	where [StatusCodes].Id = 107 --Active
+	and [SystemStatus].Id in (31,38)
+
+	group by
+	[CounterParty].Id,
+	[CounterParty].Shortname,
+	[Country].Country,
+	SubLimitTypeFrom.Id,
+	SubLimitTypeFrom.Mnemonic
+
+)
+	select *, (RESULT0.SublimitAmountInUSDTo -  RESULT1.SublimitAmountInUSDFrom) as FinalLimit
+	from RESULT0
+
+	left join RESULT1
+	on RESULT1.ShortnameFrom = RESULT0.ShortnameTo
+	and RESULT1.SubLimitTypeFrom = RESULT0.SubLimitTypeTo
+
+	order by
+	RESULT0.ShortnameTo
+	--,RESULT0.SubLimitTypeTo
+	--,RESULT1.SubLimitTypeFrom</value>
+  </data>
+  <data name="GET_LIMIT_BY_COUNTERPARTYID_LIMITTYPE" xml:space="preserve">
+    <value>with RESULT0
+as
+(
+	select  
+	[CounterParty].Id as CounterPartyIdTo,
+	[CounterParty].Shortname as ShortnameTo,
+	[Country].Country as CountryTo,
+	sum(isnull([Allocation].SublimitAmountInUSD2,0)) as SublimitAmountInUSDTo,
+	SubLimitTypeTo.Id as SubLimitTypeIdTo,
+	isnull(SubLimitTypeTo.Mnemonic,'') as SubLimitTypeTo
+	from [Allocation]
+
+	left join [SystemStatus]
+	on [SystemStatus].Id = [Allocation].AllocationSystemStatusId
+
+	left join [Status]
+	on [Status].Id = [Allocation].StatusCodeId
+
+	left join [StatusCodes]
+	on [StatusCodes].Id = [Status].StatusCodeId
+
+	left join [CounterParty]
+	on [CounterParty].Id = [Allocation].CounterpartyId
+
+	left join [Country]
+	on [Country].Id = [CounterParty].CountryId1
+
+
+	left join [SubLimitType] as SubLimitTypeTo
+	on SubLimitTypeTo.Id = Allocation.SublimitTypeId2
+
+	where [StatusCodes].Id = 107 --Active
+	and [SystemStatus].Id in (31,38)
+	and [CounterParty].Id = {0}
+	and SubLimitTypeTo.Id = {1}
+
+	group by
+	[CounterParty].Id,
+	[CounterParty].Shortname,
+	[Country].Country,
+	SubLimitTypeTo.Id,
+	SubLimitTypeTo.Mnemonic
+	
+
+),RESULT1 as
+(
+	select 
+	[CounterParty].Id as CounterPartyIdFrom,
+	[CounterParty].Shortname as ShortnameFrom,
+	[Country].Country as CountryFrom,
+	sum(isnull([Allocation].SublimitAmountInUSD,0)) as SublimitAmountInUSDFrom,
+	SubLimitTypeFrom.Id as SubLimitTypeIdFrom,
+	isnull(SubLimitTypeFrom.Mnemonic,'') as SubLimitTypeFrom
+	from [Allocation]
+
+	left join [SystemStatus]
+	on [SystemStatus].Id = [Allocation].AllocationSystemStatusId
+
+	left join [Status]
+	on [Status].Id = [Allocation].StatusCodeId
+
+	left join [StatusCodes]
+	on [StatusCodes].Id = [Status].StatusCodeId
+
+	left join [CounterParty]
+	on [CounterParty].Id = [Allocation].CounterpartyId
+
+	left join [Country]
+	on [Country].Id = [CounterParty].CountryId1
+
+	left join [SubLimitType] as SubLimitTypeFrom
+	on SubLimitTypeFrom.Id = Allocation.SublimitTypeId1
+
+	where [StatusCodes].Id = 107 --Active
+	and [SystemStatus].Id in (31,38)
+
+	group by
+	[CounterParty].Id,
+	[CounterParty].Shortname,
+	[Country].Country,
+	SubLimitTypeFrom.Id,
+	SubLimitTypeFrom.Mnemonic
+
+)
+	select *, (RESULT0.SublimitAmountInUSDTo -  RESULT1.SublimitAmountInUSDFrom) as FinalLimit
+	from RESULT0
+
+	left join RESULT1
+	on RESULT1.ShortnameFrom = RESULT0.ShortnameTo
+	and RESULT1.SubLimitTypeFrom = RESULT0.SubLimitTypeTo
+
+	order by
+	RESULT0.ShortnameTo
+	--,RESULT0.SubLimitTypeTo
+	--,RESULT1.SubLimitTypeFrom</value>
+  </data>
   <data name="INSERT_COUNTERPARTIES_SQL" xml:space="preserve">
     <value>INSERT INTO [dbo].[TransactionCounterparties]
            ([TransactionId]

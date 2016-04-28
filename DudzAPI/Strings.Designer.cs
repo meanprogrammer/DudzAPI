@@ -81,6 +81,60 @@ namespace DudzAPI {
         ///
         ///	left j [rest of string was truncated]&quot;;.
         /// </summary>
+        internal static string GET_LIMIT_BY_COUNTERPARTYID {
+            get {
+                return ResourceManager.GetString("GET_LIMIT_BY_COUNTERPARTYID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to with RESULT0
+        ///as
+        ///(
+        ///	select  
+        ///	[CounterParty].Id as CounterPartyIdTo,
+        ///	[CounterParty].Shortname as ShortnameTo,
+        ///	[Country].Country as CountryTo,
+        ///	sum(isnull([Allocation].SublimitAmountInUSD2,0)) as SublimitAmountInUSDTo,
+        ///	SubLimitTypeTo.Id as SubLimitTypeIdTo,
+        ///	isnull(SubLimitTypeTo.Mnemonic,&apos;&apos;) as SubLimitTypeTo
+        ///	from [Allocation]
+        ///
+        ///	left join [SystemStatus]
+        ///	on [SystemStatus].Id = [Allocation].AllocationSystemStatusId
+        ///
+        ///	left join [Status]
+        ///	on [Status].Id = [Allocation].StatusCodeId
+        ///
+        ///	left j [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string GET_LIMIT_BY_COUNTERPARTYID_LIMITTYPE {
+            get {
+                return ResourceManager.GetString("GET_LIMIT_BY_COUNTERPARTYID_LIMITTYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to with RESULT0
+        ///as
+        ///(
+        ///	select  
+        ///	[CounterParty].Id as CounterPartyIdTo,
+        ///	[CounterParty].Shortname as ShortnameTo,
+        ///	[Country].Country as CountryTo,
+        ///	sum(isnull([Allocation].SublimitAmountInUSD2,0)) as SublimitAmountInUSDTo,
+        ///	SubLimitTypeTo.Id as SubLimitTypeIdTo,
+        ///	isnull(SubLimitTypeTo.Mnemonic,&apos;&apos;) as SubLimitTypeTo
+        ///	from [Allocation]
+        ///
+        ///	left join [SystemStatus]
+        ///	on [SystemStatus].Id = [Allocation].AllocationSystemStatusId
+        ///
+        ///	left join [Status]
+        ///	on [Status].Id = [Allocation].StatusCodeId
+        ///
+        ///	left j [rest of string was truncated]&quot;;.
+        /// </summary>
         internal static string GETALL_LIMIT_SQL {
             get {
                 return ResourceManager.GetString("GETALL_LIMIT_SQL", resourceCulture);
