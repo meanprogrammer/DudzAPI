@@ -1,0 +1,33 @@
+﻿<hr />
+<div class="row">
+    <div class="col-md-2"><label>Counterparty</label></div>
+    <div class="col-md-10"><select class="form-control" id="counterparty" name="counterparty"></select></div>
+</div>
+<div class="row">
+    <div class="col-md-2"><label>Sublimit Type</label></div>
+    <div class="col-md-10"><select class="form-control"><option>--SELECT--</option></select></div>
+</div>
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: '/api/cparty/getall',
+                error: function () {
+                },
+                success: function (data) {
+                    $("#counterparty").append($("<option></option>").val(0).html("--SELECT--"));
+                    $.each(data, function (k, v) {
+                        $("#counterparty").append($("<option></option>").val(v.ID).html(v.Bankname));
+                    });
+                    $('#counterparty').append(options);
+                },
+                type: 'GET'
+            });
+
+
+        });
+    </script>
+}
