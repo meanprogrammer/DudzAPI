@@ -21,7 +21,8 @@ namespace DudzAPI.Controllers
         }
 
         // GET: api/SubLimit
-        public IEnumerable<string> Get()
+        [HttpGet, Route("api/sublimit/getall")]
+        public IHttpActionResult Get()
         {
             //select Id, Mnemonic from SubLimitType
             List<SubLimit> types = new List<SubLimit>();
@@ -32,9 +33,13 @@ namespace DudzAPI.Controllers
                     while (reader.Read())
                     {
                         SubLimit sb = new SubLimit();
+                        sb.ID = reader.IsDBNull(reader.GetOrdinal("Id")) ? 0 : reader.GetInt64(reader.GetOrdinal("Id"));
+                        sb.Mnemonic = reader.IsDBNull(reader.GetOrdinal("Mnemonic")) ? string.Empty : reader.GetString(reader.GetOrdinal("Mnemonic"));
+                        types.Add(sb);
                     }
                 }
             }
+            return Ok(types);
         }
 
         // GET: api/SubLimit/5

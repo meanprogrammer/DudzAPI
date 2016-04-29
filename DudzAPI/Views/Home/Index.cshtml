@@ -5,7 +5,15 @@
 </div>
 <div class="row">
     <div class="col-md-2"><label>Sublimit Type</label></div>
-    <div class="col-md-10"><select class="form-control"><option>--SELECT--</option></select></div>
+    <div class="col-md-10"><select class="form-control" id="limittype" name="limittype"><option>--SELECT--</option></select></div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" class="btn btn-primary" value="Get" id="getlimitbutton" name="getlimitbutton" />
+    </div>
+</div>
+<div id="result">
+
 </div>
 @section Scripts {
 
@@ -22,12 +30,61 @@
                     $.each(data, function (k, v) {
                         $("#counterparty").append($("<option></option>").val(v.ID).html(v.Bankname));
                     });
-                    $('#counterparty').append(options);
                 },
                 type: 'GET'
             });
 
+            $.ajax({
+                url: '/api/sublimit/getall',
+                error: function () {
+                },
+                success: function (data) {
+                   
+                    $.each(data, function (k, v) {
+                        $("#limittype").append($("<option></option>").val(v.ID).html(v.Mnemonic));
+                    });
+                },
+                type: 'GET'
+            });
 
+            // $("#limittype").append($("<option></option>").val(0).html("--SELECT--"));
+            $("#getlimitbutton").click(
+                function getlimit() {
+                    $.ajax({
+                        url: '/api/limit/get/' + $("#counterparty :selected").val() + '/' + $("#limittype :selected").val(),
+                        error: function () {
+                        },
+                        success: function (data) {
+                            var table = '<table class="table table-striped table-bordered">';
+                            table += '<tr><td>CounterPartyIDTo</td><td>ShortnameTo</td><td>CountryTo</td><td>SublimitAmountInUSDTo</td><td>SublimitTypeIdTo</td><td>SublimitTypeTo</td><td>CounterPartyIdFrom</td><td>ShortnameFrom</td><td>CountryFrom</td><td>SublimitAmountInUSDFrom</td><td>SuibLimitTypeIdFrom</td><td>SubLimitTypeFrom</td><td>FinalLimit</td></tr>'
+                            $.each(data, function (k, v) {
+                                table += '<tr>';
+                                table += '<td>' + v.CounterPartyIDTo + '</td>';
+                                table += '<td>' + v.ShortnameTo + '</td>';
+                                table += '<td>' + v.CountryTo + '</td>';
+                                table += '<td>' + v.SublimitAmountInUSDTo + '</td>';
+                                table += '<td>' + v.SublimitTypeIdTo + '</td>';
+                                table += '<td>' + v.SublimitTypeTo + '</td>';
+                                table += '<td>' + v.CounterPartyIDFrom + '</td>';
+                                table += '<td>' + v.ShortnameFrom + '</td>';
+                                table += '<td>' + v.CountryFrom + '</td>';
+                                table += '<td>' + v.SublimitAmountInUSDFrom + '</td>';
+                                table += '<td>' + v.SublimitTypeIdFrom + '</td>';
+                                table += '<td>' + v.SublimitTypeFrom + '</td>';
+                                table += '<td>' + v.FinalLimit + '</td>';
+                                table += '</tr>';
+                            });
+                            table += '</table>';
+
+                            $("#result").append(table);
+                        },
+                        type: 'GET'
+                    });
+                }
+            );
         });
+
+
+        
     </script>
 }
